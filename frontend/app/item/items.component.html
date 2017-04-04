@@ -1,0 +1,13 @@
+<ActionBar title="Donald Trump's Latest Tweets" class="action-bar">
+</ActionBar>
+<StackLayout class="page">
+    <ListView [items]="items" class="list-group">
+        <ng-template let-item="item">
+        	<StackLayout orientation="vertical" >
+        		<Label col="0" [text]="item.created_at" backgroundColor="#f5f5f5" textWrap="true" class="list-group-item"></Label>
+            	<Label col="1" [text]="item.text" textWrap="true" 
+            		   style="border-width: 0 0 1 0; border-bottom-color: black" class="list-group-item"></Label>
+            </StackLayout>
+        </ng-template>
+    </ListView>
+</StackLayout>
