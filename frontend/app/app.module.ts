@@ -4,7 +4,9 @@ import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { HttpsService } from "./services/https.service";
-import { ItemsComponent } from "./item/items.component";
+import { ItemsComponent } from "./items/items.component";
+import { LeadersComponent } from "./leaders/leaders.component";
+import { DialogContent } from "./leaders/dialog.component";
 
 @NgModule({
     bootstrap: [
@@ -13,12 +15,15 @@ import { ItemsComponent } from "./item/items.component";
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptHttpModule,
+        NativeScriptHttpModule
     ],
     declarations: [
         AppComponent,
-        ItemsComponent
+        ItemsComponent,
+        LeadersComponent,
+        DialogContent
     ],
+    entryComponents: [DialogContent],
     providers: [
         HttpsService
     ],
