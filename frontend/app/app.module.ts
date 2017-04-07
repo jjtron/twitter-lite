@@ -6,7 +6,7 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { HttpsService } from "./services/https.service";
 import { ItemsComponent } from "./items/items.component";
 import { LeadersComponent } from "./leaders/leaders.component";
-import { DialogContent } from "./leaders/dialog.component";
+//import { DialogContent } from "./leaders/dialog.component";
 
 @NgModule({
     bootstrap: [
@@ -21,9 +21,9 @@ import { DialogContent } from "./leaders/dialog.component";
         AppComponent,
         ItemsComponent,
         LeadersComponent,
-        DialogContent
+        //DialogContent
     ],
-    entryComponents: [DialogContent],
+    //entryComponents: [DialogContent],
     providers: [
         HttpsService
     ],

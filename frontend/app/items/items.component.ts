@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpsService } from "../services/https.service";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "ns-items",
@@ -9,9 +10,17 @@ import { HttpsService } from "../services/https.service";
 export class ItemsComponent implements OnInit {
     items: any[];
 
-    constructor(private httpsService: HttpsService) { }
+    constructor(
+        private httpsService: HttpsService, 
+        private route: ActivatedRoute) {}
 
     ngOnInit(): void {
+
+        this.route.url.subscribe((url: any) => {
+            console.log('url', url);
+            console.log(url[0].parameters.user);
+        });
+
         this.httpsService.getTweets()
             .subscribe((res) => {
                 this.items = res;

@@ -36,8 +36,9 @@ export class HttpsService {
     }
 
     getLeaders () {
-        this.zone.run(() => {
-            this.leaders.next(['realDonaldTrump', 'HillaryClinton']);
-        });
+        // simulate lag time temporarily
+        setTimeout(() => {
+            this.leaders.next(['realDonaldTrump', 'HillaryClinton', 'mike_pence', 'Reince']);
+        }, 0);
     }
 }

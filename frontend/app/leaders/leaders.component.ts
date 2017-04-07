@@ -1,41 +1,44 @@
-import { Component, OnInit, ViewContainerRef } from "@angular/core";
+import { Component } from "@angular/core";
 import { HttpsService } from "../services/https.service";
 import { DialogContent } from "./dialog.component";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
+import { Router } from '@angular/router';
 
 @Component({
     selector: "ns-leaders",
     moduleId: module.id,
-    template:  `<StackLayout orientation="vertical" width="210" height="210" backgroundColor="lightgray">
-                    <ListView [items]="leaders" class="list-group">
-                        <ng-template let-item="item">
-                            <Label [text]="item" height="200"></Label>
-                        </ng-template>
-                    </ListView>
+    template:  `<StackLayout orientation="vertical" width="210" height="250" backgroundColor="lightgray">
+                    <ListPicker #picker class="p-15" *ngIf="leaders.length !== 0"
+                                    [items]="leaders"
+                                    [selectedIndex]="index"
+                                    (selectedIndexChange)="selectedIndexChanged(picker)">
+                    </ListPicker>
+                    <Button class="btn btn-primary btn-active" text="Go" (tap)="onTap()"></Button>
                 </StackLayout>`
 })
-export class LeadersComponent implements OnInit {
+export class LeadersComponent {
     leaders: string[];
+    picked: string;
+    index: number;
 
     constructor(private httpsService: HttpsService, 
                 private modalService: ModalDialogService,
-                private viewContainerRef: ViewContainerRef) { }
-
-    ngOnInit(): void {
+                private router: Router) {
         this.httpsService.getLeaders();
-        this.httpsService.leaders.subscribe((leaders) => {
-            this.leaders = leaders;
-            this.show();
-        });
     }
 
-    show() {
-        let options: ModalDialogOptions = {
-            context: { promptMsg: "This is the prompt message!" },
-            fullscreen: true,
-            viewContainerRef: this.viewContainerRef
-        };
+    ngOnInit (): void {
+        this.httpsService.leaders.subscribe((leaders) => {
+            this.index = 1;
+            this.leaders = leaders;
+        });    
+    }
     
-        this.modalService.showModal(DialogContent, options);
+    selectedIndexChanged(picker) {
+        this.index = picker.selectedIndex;
+    }
+
+    onTap () {
+        this.router.navigate(['/items', {user: this.index}]);
     }
 }
