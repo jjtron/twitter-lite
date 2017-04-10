@@ -7,14 +7,22 @@ import { Router } from '@angular/router';
 @Component({
     selector: "ns-leaders",
     moduleId: module.id,
-    template:  `<StackLayout orientation="vertical" width="210" height="250" backgroundColor="lightgray">
-                    <ListPicker #picker class="p-15" *ngIf="leaders.length !== 0"
+    template:  `<GridLayout columns="*" rows="auto, *" >
+                    <twtr-lite-menu row="0"></twtr-lite-menu>
+                    <StackLayout    orientation="vertical"
+                                    row="1"
+                                    width="210"
+                                    height="250"
+                                    backgroundColor="lightgray">
+                        <ListPicker #picker class="p-15"
+                                    *ngIf="leaders.length !== 0"
                                     [items]="leaders"
                                     [selectedIndex]="index"
                                     (selectedIndexChange)="selectedIndexChanged(picker)">
-                    </ListPicker>
-                    <Button class="btn btn-primary btn-active" text="Go" (tap)="onTap()"></Button>
-                </StackLayout>`
+                        </ListPicker>
+                        <Button class="btn btn-primary btn-active" text="Go" (tap)="onTap()"></Button>
+                    </StackLayout>
+                </GridLayout>`
 })
 export class LeadersComponent {
     leaders: string[];

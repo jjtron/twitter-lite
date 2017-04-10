@@ -6,6 +6,7 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { HttpsService } from "./services/https.service";
 import { ItemsComponent } from "./items/items.component";
 import { LeadersComponent } from "./leaders/leaders.component";
+import { MenuComponent } from "./menu/menu.component";
 //import { DialogContent } from "./leaders/dialog.component";
 
 @NgModule({
@@ -21,6 +22,7 @@ import { LeadersComponent } from "./leaders/leaders.component";
         AppComponent,
         ItemsComponent,
         LeadersComponent,
+        MenuComponent
         //DialogContent
     ],
     //entryComponents: [DialogContent],
