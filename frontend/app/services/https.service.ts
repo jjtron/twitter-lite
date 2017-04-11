@@ -1,12 +1,9 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
-import { Observable, BehaviorSubject } from "rxjs/Rx";
 import "rxjs/add/operator/map";
 
 @Injectable()
 export class HttpsService {
-
-    public leaders: BehaviorSubject<Array<string>> = new BehaviorSubject([]);
 
     constructor(private http: Http, private zone: NgZone) {}
 
@@ -33,12 +30,5 @@ export class HttpsService {
         headers.append('Cache-Control', 'max-age=0');
         headers.append('Connection', 'keep-alive');
         return headers;
-    }
-
-    getLeaders () {
-        // simulate lag time temporarily
-        setTimeout(() => {
-            this.leaders.next(['realDonaldTrump', 'HillaryClinton', 'mike_pence', 'Reince']);
-        }, 0);
     }
 }

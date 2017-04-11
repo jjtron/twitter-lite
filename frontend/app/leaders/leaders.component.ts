@@ -1,14 +1,17 @@
 import { Component } from "@angular/core";
 import { HttpsService } from "../services/https.service";
-import { DialogContent } from "./dialog.component";
+import { FileService } from "../services/file.service";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { Router } from '@angular/router';
+import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "ns-leaders",
     moduleId: module.id,
     template:  `<GridLayout columns="*" rows="auto, *" >
-                    <twtr-lite-menu row="0"></twtr-lite-menu>
+                    <twtr-lite-menu row="0"
+                            (add)="addLeaders()"
+                            (delete)="deleteLeaders()"></twtr-lite-menu>
                     <StackLayout    orientation="vertical"
                                     row="1"
                                     width="210"
@@ -29,17 +32,18 @@ export class LeadersComponent {
     picked: string;
     index: number;
 
-    constructor(private httpsService: HttpsService, 
+    constructor(private httpsService: HttpsService,
+                private fileService: FileService, 
                 private modalService: ModalDialogService,
                 private router: Router) {
-        this.httpsService.getLeaders();
+        this.fileService.getLeaders();
     }
 
     ngOnInit (): void {
-        this.httpsService.leaders.subscribe((leaders) => {
-            this.index = 1;
+        this.fileService.leaders.subscribe((leaders) => {
+            this.index = 2;
             this.leaders = leaders;
-        });    
+        });
     }
     
     selectedIndexChanged(picker) {
@@ -48,5 +52,29 @@ export class LeadersComponent {
 
     onTap () {
         this.router.navigate(['/items', {user: this.index}]);
+    }
+
+    addLeaders () {
+        let options = {
+            title: "I want to follow ...",
+            inputType: dialogs.inputType.text,
+            okButtonText: "Ok",
+            cancelButtonText: "Cancel"
+        };
+        dialogs.prompt(options).then((result: dialogs.PromptResult) => {
+            this.fileService.addLeader(result.text);
+        });
+    }
+
+    deleteLeaders () {
+        let options = {
+            title: "Race selection",
+            message: "Choose your race",
+            cancelButtonText: "Cancel",
+            actions: this.leaders
+        };
+        dialogs.action(options).then((result) => {
+            console.log(result);
+        });  
     }
 }
