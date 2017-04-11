@@ -30,7 +30,7 @@ import * as dialogs from "ui/dialogs";
 export class LeadersComponent {
     leaders: string[];
     picked: string;
-    index: number;
+    index: number = 0;
 
     constructor(private httpsService: HttpsService,
                 private fileService: FileService, 
@@ -41,7 +41,7 @@ export class LeadersComponent {
 
     ngOnInit (): void {
         this.fileService.leaders.subscribe((leaders) => {
-            this.index = 2;
+            this.index = leaders.length - 1;
             this.leaders = leaders;
         });
     }
@@ -51,7 +51,7 @@ export class LeadersComponent {
     }
 
     onTap () {
-        this.router.navigate(['/items', {user: this.index}]);
+        this.router.navigate(['/items', {user: this.leaders[this.index]}]);
     }
 
     addLeaders () {

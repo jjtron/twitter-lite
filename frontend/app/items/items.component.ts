@@ -11,13 +11,12 @@ export class ItemsComponent implements OnInit {
     items: any[];
 
     constructor(
-        private httpsService: HttpsService, 
+        private httpsService: HttpsService,
         private route: ActivatedRoute) {}
 
     ngOnInit(): void {
 
         this.route.url.subscribe((url: any) => {
-            console.log('url', url);
             console.log(url[0].parameters.user);
         });
 

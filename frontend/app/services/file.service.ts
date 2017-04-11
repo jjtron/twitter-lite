@@ -15,6 +15,13 @@ export class FileService {
     }
 
     getLeaders () {
+        
+        let file = fs.path.join(this.documents.path, this.persistedFile);
+        if (!fs.File.exists(file)) {
+            let fileNew = fs.knownFolders.documents().getFile(this.persistedFile);
+            fileNew.writeText(JSON.stringify(new Array('realDonaldTrump')));
+        }
+        
         new Promise((resolve, reject) => {
             this.documents.getFile(this.persistedFile)
                 .readText()
