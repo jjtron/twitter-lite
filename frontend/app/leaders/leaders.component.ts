@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { HttpsService } from "../services/https.service";
 import { FileService } from "../services/file.service";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 import * as dialogs from "ui/dialogs";
 
 @Component({
@@ -43,6 +43,13 @@ export class LeadersComponent {
         this.fileService.leaders.subscribe((leaders) => {
             this.index = leaders.length - 1;
             this.leaders = leaders;
+        });
+        this.router.events.subscribe((e) => {
+            if (e instanceof NavigationEnd && e.url === '/leaders') {
+                let tmp = this.index;
+                this.index = 0;
+                setTimeout(() => { this.index = tmp; }, 0);
+            }
         });
     }
     
