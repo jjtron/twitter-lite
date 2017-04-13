@@ -7,9 +7,9 @@ export class HttpsService {
 
     constructor(private http: Http, private zone: NgZone) {}
 
-    getTweets () {
+    getTweets (user: string) {
         return this.http.get(
-            'http://localhost:8080',
+            'http://localhost:8080/' + user,
             { headers: this.getHeaders () }
         )
         .map((res: Response) => {
