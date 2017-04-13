@@ -25,14 +25,16 @@ var doRequest = function (user) {
 			qs: {count: 10, screen_name: user},
 		    method: 'GET',
 		    headers: {
-		        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAPSUzwAAAAAAyzcPjx68z3nBFNnbJXecuzpSsJ8%3DujPU0YtH0vUetTzJRl1OY2xeXg4VptbzidLvzROLpr9d9qd6J3',
+		        'Authorization': 'Bearer xAAAAAAAAAAAAAAAAAAAAAPSUzwAAAAAAyzcPjx68z3nBFNnbJXecuzpSsJ8%3DujPU0YtH0vUetTzJRl1OY2xeXg4VptbzidLvzROLpr9d9qd6J3',
 		        'User-Agent': 'SelectedPolitics',
 		        'Host': 'api.twitter.com'
 		    }
 		}, function(error, response, body){
 		    if(error) {
-		        console.log(error);
+		    	console.log('error', error);
+		        resolve(error);
 		    } else {
+		    	console.log('ok', body);
 		    	resolve(body);
 		    }
 		});

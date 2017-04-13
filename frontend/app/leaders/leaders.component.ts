@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { HttpsService } from "../services/https.service";
 import { FileService } from "../services/file.service";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
-import { Router, NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import * as dialogs from "ui/dialogs";
 
 @Component({
