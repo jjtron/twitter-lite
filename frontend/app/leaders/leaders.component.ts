@@ -2,18 +2,23 @@ import { Component } from "@angular/core";
 import { HttpsService } from "../services/https.service";
 import { FileService } from "../services/file.service";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute,  } from '@angular/router';
 import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "ns-leaders",
     moduleId: module.id,
-    template:  `<GridLayout columns="*" rows="auto, *" >
+    template:  `<GridLayout columns="*" rows="auto, auto, *" >
+
                     <twtr-lite-menu row="0"
                             (add)="addLeaders()"
                             (delete)="deleteLeaders()"></twtr-lite-menu>
+
+                    <Label class="error-message" row="1" width="210" *ngIf="error"
+                           text="{{error}}" textWrap="true" backgroundColor="red"></Label>
+
                     <StackLayout    orientation="vertical"
-                                    row="1"
+                                    row="2"
                                     width="210"
                                     height="250"
                                     backgroundColor="lightgray">
@@ -31,11 +36,13 @@ export class LeadersComponent {
     leaders: string[];
     picked: string;
     index: number = 0;
+    error: string = null;
 
     constructor(private httpsService: HttpsService,
                 private fileService: FileService, 
                 private modalService: ModalDialogService,
-                private router: Router) {
+                private router: Router,
+                private route: ActivatedRoute) {
         this.fileService.getLeaders();
     }
 
@@ -51,6 +58,11 @@ export class LeadersComponent {
                 setTimeout(() => { this.index = tmp; }, 0);
             }
         });
+        this.route.url.subscribe((url: any) => {
+            if (url[0].parameters.error) {
+                this.error = url[0].parameters.error;
+            }
+        });
     }
     
     selectedIndexChanged(picker) {
@@ -58,6 +70,7 @@ export class LeadersComponent {
     }
 
     onTap () {
+        this.error = null;
         this.router.navigate(['/items', {user: this.leaders[this.index]}]);
     }
 

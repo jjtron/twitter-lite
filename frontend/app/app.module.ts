@@ -8,7 +8,6 @@ import { FileService } from "./services/file.service";
 import { ItemsComponent } from "./items/items.component";
 import { LeadersComponent } from "./leaders/leaders.component";
 import { MenuComponent } from "./menu/menu.component";
-import { ErrComponent } from "./err/err.component";
 
 @NgModule({
     bootstrap: [
@@ -23,8 +22,7 @@ import { ErrComponent } from "./err/err.component";
         AppComponent,
         ItemsComponent,
         LeadersComponent,
-        MenuComponent,
-        ErrComponent
+        MenuComponent
     ],
     providers: [
         HttpsService,

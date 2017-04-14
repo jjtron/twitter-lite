@@ -36,7 +36,7 @@ export class ItemsComponent implements OnInit {
                               return 0;
                             });
                         } catch (error) {
-                            this.router.navigate(['/error']);
+                            this.router.navigate(['/leaders', { error: error.message }]);
                         }
                     },
                     (error) => {

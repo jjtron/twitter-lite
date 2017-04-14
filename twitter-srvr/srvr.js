@@ -13,28 +13,36 @@ const PORT=8080;
 
 function handleRequest(request, response){
 	let user = request.url.substr(1);
-	doRequest(user).then((data) => {
-		response.end(data);
-	});
+	doRequest(user)
+		.then((data) => {
+			response.end(data);
+		})
+		.catch((error) => {
+			response.end(error);
+		});
 }
 
 var doRequest = function (user) {
 	return new Promise ((resolve, reject) => {
+		
+		let urlstring = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+		if (user === 'Reince') {
+			urlstring = 'https://api.twitterx.com/1.1/statuses/user_timeline.json';
+		}
+		
 		request({
-			url: 'https://api.twitter.com/1.1/statuses/user_timeline.json',
+			url: urlstring,
 			qs: {count: 10, screen_name: user},
 		    method: 'GET',
 		    headers: {
-		        'Authorization': 'Bearer xAAAAAAAAAAAAAAAAAAAAAPSUzwAAAAAAyzcPjx68z3nBFNnbJXecuzpSsJ8%3DujPU0YtH0vUetTzJRl1OY2xeXg4VptbzidLvzROLpr9d9qd6J3',
+		        'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAPSUzwAAAAAAyzcPjx68z3nBFNnbJXecuzpSsJ8%3DujPU0YtH0vUetTzJRl1OY2xeXg4VptbzidLvzROLpr9d9qd6J3',
 		        'User-Agent': 'SelectedPolitics',
 		        'Host': 'api.twitter.com'
 		    }
 		}, function(error, response, body){
 		    if(error) {
-		    	console.log('error', error);
-		        resolve(error);
+		        reject('Internal server error');
 		    } else {
-		    	console.log('ok', body);
 		    	resolve(body);
 		    }
 		});
