@@ -12,7 +12,7 @@ export class HttpsService {
             'http://localhost:8080/' + user,
             { headers: this.getHeaders () }
         )
-        .map((res: Response) => {
+        .map((res) => {
             try {
                 return res.json();
             } catch (e) {

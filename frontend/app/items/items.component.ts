@@ -22,9 +22,8 @@ export class ItemsComponent implements OnInit {
                 .subscribe(
                     (res) => {
                         try {
-                            if (res.hasOwnProperty('errors')) {
-                                let e = res.errors[0];
-                                throw new Error('code: ' + e.code + ', ' + e.message);
+                            if (res.hasOwnProperty('isBoom')) {
+                                throw new Error(res.output.statusCode + ', ' + res.message);
                             } else {
                                 this.items = res;
                             }
@@ -40,7 +39,7 @@ export class ItemsComponent implements OnInit {
                         }
                     },
                     (error) => {
-                        console.log('error');
+                        console.log('Error',error.message);
                     });
         });
     }
