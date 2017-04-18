@@ -38,8 +38,8 @@ export class ItemsComponent implements OnInit {
                             this.router.navigate(['/leaders', { error: error.message }]);
                         }
                     },
-                    (error) => {
-                        console.log('Error',error.message);
+                    () => {
+                        this.router.navigate(['/leaders', { error: 'Server response error' }]);
                     });
         });
     }

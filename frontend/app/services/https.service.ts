@@ -12,12 +12,8 @@ export class HttpsService {
             'http://localhost:8080/' + user,
             { headers: this.getHeaders () }
         )
-        .map((res) => {
-            try {
-                return res.json();
-            } catch (e) {
-                throw 'Cannot JSON.parse response';    
-            }
+        .map((res: Response) => {
+            return res.json();
         });
     }
         
