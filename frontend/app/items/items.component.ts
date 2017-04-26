@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ItemsComponent implements OnInit {
     items: any[];
+    username: string;
 
     constructor(
         private httpsService: HttpsService,
@@ -17,8 +18,9 @@ export class ItemsComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.route.url.subscribe((url: any) => { 
-            this.httpsService.getTweets(url[0].parameters.user)
+        this.route.url.subscribe((url: any) => {
+            this.username = url[0].parameters.user;
+            this.httpsService.getTweets(this.username)
                 .subscribe(
                     (res) => {
                         try {

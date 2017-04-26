@@ -68,4 +68,30 @@ export class FileService {
             this.leaders.next(data);
         });
     }
+
+    deleteLeader (leader: string) {
+
+        let file = fs.knownFolders.documents().getFile(this.persistedFile);
+        let currentData;
+        file.readText().then(function(content) {
+            return currentData = JSON.parse(content);
+        })
+        .then((currentData) => {
+            let i = currentData.indexOf(leader);
+            currentData.splice(i, 1);
+            return currentData;
+        })
+        .then((currentData) => {
+            return file.writeText(JSON.stringify(currentData));
+        })
+        .then(() => {
+            return file.readText();
+        })
+        .then(function(content) {
+            return JSON.parse(content);
+        })
+        .then((data) => {
+            this.leaders.next(data);
+        });
+    }
 }

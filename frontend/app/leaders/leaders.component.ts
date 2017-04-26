@@ -65,14 +65,6 @@ export class LeadersComponent {
     }
 
     deleteLeaders () {
-        let options = {
-            title: "Race selection",
-            message: "Choose your race",
-            cancelButtonText: "Cancel",
-            actions: this.leaders
-        };
-        dialogs.action(options).then((result) => {
-            console.log(result);
-        });  
+        this.fileService.deleteLeader(this.leaders[this.index]);
     }
 }

@@ -7,7 +7,6 @@ import { HttpsService } from "./services/https.service";
 import { FileService } from "./services/file.service";
 import { ItemsComponent } from "./items/items.component";
 import { LeadersComponent } from "./leaders/leaders.component";
-import { MenuComponent } from "./menu/menu.component";
 
 @NgModule({
     bootstrap: [
@@ -21,8 +20,7 @@ import { MenuComponent } from "./menu/menu.component";
     declarations: [
         AppComponent,
         ItemsComponent,
-        LeadersComponent,
-        MenuComponent
+        LeadersComponent
     ],
     providers: [
         HttpsService,
