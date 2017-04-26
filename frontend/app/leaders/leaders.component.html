@@ -1,0 +1,21 @@
+<GridLayout columns="*" rows="auto, auto, *" >
+
+    <Label class="error-message" row="1" width="210" *ngIf="error"
+           text="{{error}}" textWrap="true" backgroundColor="red"></Label>
+
+    <StackLayout    orientation="vertical"
+                    row="2"
+                    width="210"
+                    height="400"
+                    backgroundColor="lightgray">
+        <ListPicker #picker class="p-15"
+                    *ngIf="leaders.length !== 0"
+                    [items]="leaders"
+                    [selectedIndex]="index"
+                    (selectedIndexChange)="selectedIndexChanged(picker)">
+        </ListPicker>
+        <Button class="btn btn-primary" text="Go" (tap)="onTap()"></Button>
+        <Button class="btn btn-primary capital-case" text="Add Leader(s)" (tap)="addLeaders()"></Button>
+        <Button class="btn btn-primary capital-case" text="Delete Leader(s)" (tap)="deleteLeaders()"></Button>
+    </StackLayout>
+</GridLayout>

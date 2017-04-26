@@ -8,29 +8,7 @@ import * as dialogs from "ui/dialogs";
 @Component({
     selector: "ns-leaders",
     moduleId: module.id,
-    template:  `<GridLayout columns="*" rows="auto, auto, *" >
-
-                    <twtr-lite-menu row="0"
-                            (add)="addLeaders()"
-                            (delete)="deleteLeaders()"></twtr-lite-menu>
-
-                    <Label class="error-message" row="1" width="210" *ngIf="error"
-                           text="{{error}}" textWrap="true" backgroundColor="red"></Label>
-
-                    <StackLayout    orientation="vertical"
-                                    row="2"
-                                    width="210"
-                                    height="250"
-                                    backgroundColor="lightgray">
-                        <ListPicker #picker class="p-15"
-                                    *ngIf="leaders.length !== 0"
-                                    [items]="leaders"
-                                    [selectedIndex]="index"
-                                    (selectedIndexChange)="selectedIndexChanged(picker)">
-                        </ListPicker>
-                        <Button class="btn btn-primary btn-active" text="Go" (tap)="onTap()"></Button>
-                    </StackLayout>
-                </GridLayout>`
+    templateUrl: `./leaders.component.html`
 })
 export class LeadersComponent {
     leaders: string[];
