@@ -14,8 +14,8 @@
                     [selectedIndex]="index"
                     (selectedIndexChange)="selectedIndexChanged(picker)">
         </ListPicker>
-        <Button class="btn btn-primary" text="Go" (tap)="onTap()"></Button>
-        <Button class="btn btn-primary capital-case" text="Add Leader(s)" (tap)="addLeaders()"></Button>
-        <Button class="btn btn-primary capital-case" text="Delete Leader(s)" (tap)="deleteLeaders()"></Button>
+        <Button class="btn btn-go capital-case" text="Go" (tap)="onTap()"></Button>
+        <Button class="btn btn-primary capital-case" text="Add Leader" (tap)="addLeaders()"></Button>
+        <Button class="btn btn-danger capital-case" text="Delete Leader" (tap)="deleteLeaders()"></Button>
     </StackLayout>
 </GridLayout>
